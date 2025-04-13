@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clicking Dog Game - Home</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff8dc;
+      color: #333;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #f4a261;
+      padding: 20px 0;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    nav {
+      background-color: #e9c46a;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      text-decoration: none;
+      color: #264653;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #e76f51;
+    }
+    .hero {
+      padding: 50px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, #ffe8a1, #fcd5ce);
+      position: relative;
+    }
+    .hero h1 {
+      font-size: 3em;
+      color: #2a9d8f;
+    }
+    .hero p {
+      margin-top: 15px;
+      font-size: 1.2em;
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 40px;
+      gap: 20px;
+    }
+    .feature {
+      background-color: #faedcd;
+      border: 2px dashed #dda15e;
+      padding: 20px;
+      width: 250px;
+      border-radius: 12px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .feature:hover {
+      transform: scale(1.05);
+    }
+    .preview {
+      padding: 40px;
+      background-color: #fff0d6;
+      text-align: center;
+    }
+    .preview iframe {
+      pointer-events: none;
+      border: 3px solid #dda15e;
+      border-radius: 8px;
+      width: 90%;
+      height: 400px;
+    }
+    footer {
+      background-color: #f4a261;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .dog-image {
+      width: 120px;
+      height: auto;
+      animation: bounce 3s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🐶 Welcome to Clicking Dog Game</h1>
+    <p>Fun clicking adventure with your furry friends!</p>
+  </header>
+
+  <nav>
+    <a href="websitegamedog.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="team.html">Team</a>
+    <a href="clickinggamedog.html">Game</a>
+  </nav>
+
+  <div class="hero">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Cute Dog" class="dog-image">
+    <h1>Start Clicking to Adopt Dogs!</h1>
+    <p>Collect clicks and adopt as many dogs as you can. Track your progress, build your kennel, and more!</p>
+  </div>
+
+  <section class="features">
+    <div class="feature">
+      <h3>🐾 Easy Clicks</h3>
+      <p>Earn virtual currency with every click — it's simple and fun!</p>
+    </div>
+    <div class="feature">
+      <h3>🐶 Dog Adoption</h3>
+      <p>Buy dogs using your earned clicks and collect different types.</p>
+    </div>
+    <div class="feature">
+      <h3>🌐 Updates & News</h3>
+      <p>Last Updated: April 2025 — New dog breeds coming soon!</p>
+    </div>
+  </section>
+
+  <div class="preview">
+    <h2>Game Preview (not playable)</h2>
+    <iframe src="Clicking Game Dog.html" title="Game Preview"></iframe>
+  </div>
+
+  <footer>
+    &copy; 2025 Clicking Dog Game. All rights reserved.
+  </footer>
+</body>
+</html>

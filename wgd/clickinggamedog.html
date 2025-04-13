@@ -1,0 +1,358 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clicking Game Dog</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #ffeb99, #ffe5b4);
+      overflow: hidden;
+    }
+
+    nav {
+      background-color: #ffcc70;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    nav h2 {
+      color: #5c3d00;
+      margin: 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #5c3d00;
+      margin-left: 20px;
+      font-weight: bold;
+    }
+
+    h1 {
+      color: #5c3d00;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #score {
+      font-size: 24px;
+      text-align: center;
+      margin: 10px;
+      color: #333;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px auto;
+      display: block;
+      width: 120px;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #clickBtn {
+      background-color: #ff914d;
+      color: white;
+      position: absolute;
+      transition: left 0.6s ease, top 0.6s ease;
+    }
+
+    #clickBtn:hover {
+      background-color: #ff6f1f;
+    }
+
+    #buyBtn {
+      background-color: #588157;
+      color: white;
+      margin: 10px auto;
+      display: block;
+    }
+
+    .decor {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      opacity: 0.2;
+      z-index: -1;
+      animation: float 8s infinite alternate;
+    }
+
+    .decor1 { top: 10%; left: 5%; background: #ff914d; }
+    .decor2 { top: 70%; left: 80%; background: #ffd670; }
+    .decor3 { top: 40%; left: 50%; background: #ffcb77; }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-20px); }
+    }
+
+    #petShopBtn {
+      background-color: #72b9c6;
+      color: white;
+      margin: 20px auto;
+      display: block;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 18px;
+    }
+
+    #petShopBtn:hover { background-color: #4b8a92; }
+
+    #shopContainer {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    #shopBox {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      width: 80%;
+      max-height: 80%;
+      overflow: auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .itemGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .item {
+      background-color: #ff914d;
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .item:hover { transform: scale(1.05); }
+
+    .item img {
+      width: 80%;
+      height: auto;
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+
+    .item h3 { margin: 0; font-size: 18px; }
+    .item p { margin: 5px 0; font-size: 14px; }
+
+    .item button {
+      background-color: #ff6f1f;
+      color: white;
+      border-radius: 10px;
+      padding: 8px 15px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .item button:hover { background-color: #e65c1f; }
+  </style>
+</head>
+<body>
+  <nav>
+    <h2>🐾 WEBSITE Game Dog</h2>
+    <div>
+      <a href="websitegamedog.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="team.html">Team</a>
+      <a href="clickinggamedog.html">Game</a>
+    </div>
+  </nav>
+
+  <h1>Catch the Dog! 🐕</h1>
+  <p id="score">Pet Clicks: 0</p>
+  <input type="number" id="dogAmount" placeholder="How many?" min="1">
+  <button id="buyBtn" onclick="buyDog()">Buy Dog (10 Pet Clicks each)</button>
+  <button id="clickBtn" onclick="addClick()">Click Me!</button>
+  <button id="petShopBtn" onclick="openPetShop()">Open Pet Shop</button>
+
+  <div id="shopContainer">
+    <div id="shopBox">
+      <button onclick="closePetShop()">Close Shop</button>
+      <div class="itemGrid" id="itemGrid"></div>
+    </div>
+  </div>
+
+  <div class="decor decor1"></div>
+  <div class="decor decor2"></div>
+  <div class="decor decor3"></div>
+
+  <script>
+    let clicks = 0;
+    let clickMultiplier = 1;
+    let autoClickerActive = false;
+    const clickBtn = document.getElementById("clickBtn");
+
+    const shopItems = [
+      {
+        name: "Golden Retriever",
+        price: 100,
+        effect: () => { clickMultiplier += 1; },
+        img: "https://via.placeholder.com/150"
+      },
+      {
+        name: "Auto Clicker",
+        price: 250,
+        effect: () => {
+          if (!autoClickerActive) {
+            autoClickerActive = true;
+            setInterval(() => addClick(), 2000);
+          }
+        },
+        img: "https://via.placeholder.com/150"
+      },
+      {
+        name: "Golden Bone",
+        price: 150,
+        effect: () => { clickMultiplier *= 2; },
+        img: "https://via.placeholder.com/150"
+      },
+      {
+        name: "Bulldog",
+        price: 80,
+        effect: () => { clickMultiplier += 0.5; },
+        img: "https://via.placeholder.com/150"
+      },
+      {
+        name: "Schnauzer",
+        price: 200,
+        effect: () => { clickMultiplier += 2; },
+        img: "https://via.placeholder.com/150"
+      },
+      {
+        name: "Magic Biscuit",
+        price: 300,
+        effect: () => { clickMultiplier *= 3; },
+        img: "https://via.placeholder.com/150"
+      }
+    ];
+
+    function addClick() {
+      clicks += clickMultiplier;
+      updateScore();
+    }
+
+    function updateScore() {
+      document.getElementById("score").innerText = "Pet Clicks: " + Math.floor(clicks);
+    }
+
+    function buyDog() {
+  	let input = document.getElementById("dogAmount").value;
+  	let amount = input === "" ? 1 : parseInt(input);
+  	let cost = amount * 10;
+
+  	if (clicks >= cost) {
+    	clicks -= cost;
+
+    	clickMultiplier += amount * 2; // Each dog adds +0.1 multiplier
+
+    	updateScore();
+    	alert("You bought " + amount + " dog(s)! 🐕\nYour click power increased!");
+
+  	} else {
+    	alert("Not enough Pet Clicks to buy " + amount + " dog(s).");
+  	}
+	}
+
+
+    function moveButtonRandomly() {
+      const x = Math.random() * (window.innerWidth - 150);
+      const y = Math.random() * (window.innerHeight - 150);
+      clickBtn.style.left = `${x}px`;
+      clickBtn.style.top = `${y}px`;
+    }
+
+    function handleMouseMove(e) {
+      const rect = clickBtn.getBoundingClientRect();
+      const distX = e.clientX - (rect.left + rect.width / 2);
+      const distY = e.clientY - (rect.top + rect.height / 2);
+      const distance = Math.sqrt(distX * distX + distY * distY);
+      if (distance < 150) {
+        moveButtonRandomly();
+      }
+    }
+
+    function openPetShop() {
+      document.getElementById("shopContainer").style.display = "flex";
+    }
+
+    function closePetShop() {
+      document.getElementById("shopContainer").style.display = "none";
+    }
+
+    function renderShop() {
+      const grid = document.getElementById("itemGrid");
+      grid.innerHTML = "";
+      shopItems.forEach((item, i) => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `
+          <img src="${item.img}" alt="${item.name}">
+          <h3>${item.name}</h3>
+          <p>Price: ${item.price} Pet Clicks</p>
+          <button onclick="buyItem(${i})">Buy</button>
+        `;
+        grid.appendChild(div);
+      });
+    }
+    
+    function buyItem(index) {
+      const item = shopItems[index];
+  
+
+      if (clicks >= item.price) {
+        clicks -= item.price;
+        item.effect();
+        updateScore();
+        purchasedItems[index] = true; // Mark as bought
+        alert(`You bought ${item.name}! 🎉`);
+      } else {
+        alert("Not enough Pet Clicks to buy " + item.name + ".");
+      }
+    }
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.onload = () => {
+      moveButtonRandomly();
+      renderShop();
+    };
+  </script>
+</body>
+</html>
